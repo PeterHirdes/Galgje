@@ -4,7 +4,6 @@ import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.Scanner; // Import the Scanner class to read text files
 import java.util.Random;
-import org.jetbrains.annotations.NotNull;
 
 public class Main {
 
@@ -39,7 +38,7 @@ public class Main {
 //    return charArray;
 //  }
 
-  public static String UpdateImage(@NotNull String word, String guessedLetters) {
+  public static String UpdateImage(String word, String guessedLetters) {
   String image = "";
     for(int i = 0; i < word.length(); i++) {
         if (guessedLetters.contains(Character.toString(word.charAt(i)))) {
@@ -52,7 +51,7 @@ public class Main {
     return image;
   }
 
-  public static int CountCorrectLetters(@NotNull String word, String guessedLetters){
+  public static int CountCorrectLetters(String word, String guessedLetters){
     int count = 0;
     for (int i = 0; i < word.length(); i++) {
       if (guessedLetters.contains(Character.toString(word.charAt(i)))) {
@@ -63,7 +62,7 @@ public class Main {
   }
 
 // not working as intended in (String + ..) return
-//  public static char @NotNull [] GenerateLetterList(@NotNull String letters) {
+//  public static char [] GenerateLetterList( String letters) {
 //    char[] letterList = new char[letters.length()];
 //    for (int i = 0; i < letters.length(); i++) {
 //      letterList[i] = Character.toUpperCase(letters.charAt(i));
@@ -91,28 +90,26 @@ public class Main {
   public static String GenerateHangman(int numberOfMistakes) {
     String hangman = "";
     if (numberOfMistakes == 0) {
-      hangman = ""; }
-    else if (numberOfMistakes ==1) {
-      hangman="\n\n\n\n _ _"; }
-    else if (numberOfMistakes ==2) {
+      hangman=""; }
+    else if (numberOfMistakes == 1) {
       hangman = "|\n|\n|\n|\n|_ _"; }
-    else if (numberOfMistakes ==3) {
+    else if (numberOfMistakes == 2) {
       hangman = "____\n|\n|\n|\n|\n|_ _"; }
-    else if (numberOfMistakes ==4) {
+    else if (numberOfMistakes == 3) {
       hangman = "____\n|/\n|\n|\n|\n|_ _"; }
-    else if (numberOfMistakes ==5) {
+    else if (numberOfMistakes == 4) {
       hangman = "____\n|/ |\n|\n|\n|\n|_ _"; }
-    else if (numberOfMistakes ==6) {
+    else if (numberOfMistakes == 5) {
       hangman = "____\n|/ |\n|  O\n|\n|\n|_ _"; }
-    else if (numberOfMistakes ==7) {
+    else if (numberOfMistakes == 6) {
       hangman = "____\n|/ |\n|  O\n|  |\n|\n|_ _"; }
-    else if (numberOfMistakes ==8) {
+    else if (numberOfMistakes == 7) {
       hangman = "____\n|/ |\n|  O\n| /|\n|\n|_ _"; }
-    else if (numberOfMistakes ==9) {
+    else if (numberOfMistakes == 8) {
       hangman = "____\n|/ |\n|  O\n| /|\\\n|\n|_ _"; }
-    else if (numberOfMistakes ==10) {
+    else if (numberOfMistakes == 9) {
       hangman = "____\n|/ |\n|  O\n| /|\\\n| /\n|_ _"; }
-    else if (numberOfMistakes ==11) {
+    else if (numberOfMistakes == 10) {
       hangman = "____\n|/ |\n|  O\n| /|\\\n| / \\\n|_ _"; }
 
     return hangman;
@@ -180,7 +177,7 @@ public class Main {
       }
       guess = guess.toLowerCase();
 
-      if (mysteryWord.contains(guess)) {
+      if (checkIfCharacterInWord(mysteryWord, guess)) {
         if (!guessedLetters.contains(guess)) {
           guessedLetters += guess;
           image = UpdateImage(mysteryWord, guessedLetters);
@@ -237,6 +234,11 @@ public class Main {
             + "'. Gelukkig is het maar een spelletje ;)");
     }
   }
+
+  public static boolean checkIfCharacterInWord(String mysteryWord, String guess) {
+    return mysteryWord.contains(guess);
+  }
+
   public static void main(String[] args) {
         Hangman(false);
         Hangman(true);
